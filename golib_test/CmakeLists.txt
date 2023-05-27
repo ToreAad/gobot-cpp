@@ -1,0 +1,34 @@
+# CmakeLists.txt module testing gobotlib
+cmake_minimum_required(VERSION 3.0)
+project(golib_test)
+
+
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost REQUIRED COMPONENTS unit_test_framework)
+
+add_executable(golib_test 
+    "point_tests.cpp" 
+    "gostring_tests.cpp" 
+    "goboard_tests.cpp"
+    "gamestate_tests.cpp"
+    "scoring_tests.cpp"
+    "go_tests.cpp"
+)
+
+# this is heuristically generated, and may not be correct
+target_link_libraries(golib_test PRIVATE Boost::unit_test_framework)
+target_include_directories(golib_test PRIVATE ${Boost_INCLUDE_DIRS})
+target_link_libraries(golib_test PRIVATE golib)
+
+enable_testing()
+add_test(NAME golib_test COMMAND golib_test)
+
+# Set the path to the directory containing the `golib.dll` file
+set(golib_DLL_DIR ${golib_BINARY_DIR}/${CMAKE_CFG_INTDIR})
+
+
+# Copy the `golib.dll` file to the output directory of the `golib_test` target
+add_custom_command(TARGET golib_test POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${golib_DLL_DIR}/golib.dll"
+        $<TARGET_FILE_DIR:golib_test>/golib.dll)
