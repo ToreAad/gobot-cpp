@@ -30,5 +30,5 @@ set(golib_DLL_DIR ${golib_BINARY_DIR}/${CMAKE_CFG_INTDIR})
 # Copy the `golib.dll` file to the output directory of the `golib_test` target
 add_custom_command(TARGET golib_test POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${golib_DLL_DIR}/golib.dll"
-        $<TARGET_FILE_DIR:golib_test>/golib.dll)
+        "${golib_DLL_DIR}/libgolib.so"
+        $<TARGET_FILE_DIR:golib_test>/libgolib.so)

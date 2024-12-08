@@ -3,6 +3,7 @@
 #define GOSTRING_H
 
 #include <set>
+#include <cstddef>
 #include "player.h"
 #include "point.h"
 

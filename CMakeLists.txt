@@ -16,3 +16,5 @@ endif()
 add_subdirectory ("gocli")
 add_subdirectory ("golib")
 add_subdirectory ("golib_test")
+
+enable_testing()

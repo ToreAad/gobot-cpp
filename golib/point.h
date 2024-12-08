@@ -10,7 +10,7 @@ public:
 	int row;
 	int col;
 	Point(int _row, int _col) : row(_row), col(_col) {}
-	std::vector<Point> Point::neighbours() const;
+	std::vector<Point> neighbours() const;
 
 	bool operator<(const Point& rhs) const
 	{
